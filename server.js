@@ -1,8 +1,27 @@
 import express from "express"
 import {users} from "./sample/user.js"
 import {classSchedule} from "./sample/classSchedule.js"
+import swaggerJsdoc from "swagger-jsdoc"
+import swaggerUi from "swagger-ui-express"
+const options = {
+  swaggerDefinition: {
+    // 這邊會是你的api文件網頁描述
+    info: {
+      title: 'ec_web_demo API',
+      version: '1.0.0',
+      description: 'Generate ec_web_demo API document with swagger'
+    }
+  },
+  // 這邊會是你想要產生的api文件檔案，我是直接讓swagger去列出所有controllers
+  apis: ['./controllers/*.js']
+};
+const specs = swaggerJsdoc(options);
+
+
 const app = express()
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 const port = 4000
+
 
 app.use(express.json()) // for parse the requeset body
 app.get('/', (req, res) => {
