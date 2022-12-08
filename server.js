@@ -4,6 +4,8 @@ import classSchedule from "./routes/classSchedule.js"
 import user from "./routes/user.js"
 import swaggerJsdoc from "swagger-jsdoc"
 import swaggerUi from "swagger-ui-express"
+import dotenv from "dotenv"
+const app = express()
 const options = {
   swaggerDefinition: {
     // 這邊會是你的api文件網頁描述
@@ -19,8 +21,11 @@ const options = {
 const specs = swaggerJsdoc(options);
 
 
-const app = express()
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+
+
+
+dotenv.config()
 const port = 4000
 
 
@@ -28,6 +33,7 @@ app.use(express.json()) // for parse the requeset body
 app.get('/', (req, res) => {
   res.send('Hello Good World!!')
 })
+
 app.use("/user", user)
 
 app.use("/classSchedule", classSchedule)
