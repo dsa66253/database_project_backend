@@ -5,21 +5,28 @@ let router = express.Router()
  * @swagger
  * /classSchedule:
  *   get:
- *     summary: get class schedule by student id
- *     requestBody:
- *       content:
- *        application/json:
+ *     summary: get class schedule by student id**
+ *     parameters:
+ *      - name: body@@
+ *        in: body
+ *        required: true
+ *        schema: 
  *          type: object
- *         
- *              
+ *          properties:
+ *            messageId:
+ *              type: string
+ *              example: r09525126@ntu.edu.tw
  *     responses:
  * 
  *       '200':
  *         description: Ok
  */
 router.get("/", (req, res) => {
-    console.log("jel")
+    console.log(req)
+    let lang = req.headers.lang
+    console.log(lang)
     let account = req.body.SId
+
     let personalScheduel = null
     classSchedule.forEach((e) => {
         if (e.SId === account) {
