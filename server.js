@@ -7,7 +7,9 @@ import swaggerUi from "swagger-ui-express"
 import dotenv from "dotenv"
 import courseByUser from "./routes/courseByUser.js"
 import course from "./routes/course.js"
+import cors from "cors"
 const app = express()
+app.use(cors())
 const options = {
   swaggerDefinition: {
     // 這邊會是你的api文件網頁描述

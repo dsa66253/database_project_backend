@@ -1,5 +1,6 @@
 import express from "express"
 import { users } from "../sample/user.js"
+import query from "../db/query.js"
 let router = express.Router()
 /**
  * @swagger
@@ -17,19 +18,25 @@ let router = express.Router()
  *       '200':
  *         description: Ok
  */
-router.get('/', (req, res) => {
+router.post('/', async (req, res) => {
     // console.log(req)
     // console.log(req.query)
-    let result = false
-    users.forEach((e) => {
-        if (e.SId === req.body.SId && e.password === req.body.password) {
-            console.log(req.body)
-            result = true
-        }
-    })
-    // if req.query.account==
-
-    res.send(result)
+    console.log("req.body.body", req.body.body)
+    let userExist = false
+    let SId = req.body.body.SId
+    let sql = `SELECT * 
+    FROM Student AS S
+    WHERE S.SId=\"${SId}\"`
+    let user = await query(sql)
+    if (user.length===0){
+        res.send(userExist)
+        sql = `INSERT INTO Student(SId, Password)
+        VALUES(\"${SId}\", \"${SId}\");`
+        await query(sql)
+    }else{
+        userExist = true
+        res.send(userExist)
+    }
 })
 
 export default router
