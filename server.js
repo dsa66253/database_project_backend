@@ -5,7 +5,16 @@ import user from "./routes/user.js"
 import swaggerJsdoc from "swagger-jsdoc"
 import swaggerUi from "swagger-ui-express"
 import dotenv from "dotenv"
+import courseByUser from "./routes/courseByUser.js"
+import course from "./routes/course.js"
+import cors from "cors"
 const app = express()
+app.use(
+  cors({
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  })
+);
 const options = {
   swaggerDefinition: {
     // 這邊會是你的api文件網頁描述
@@ -35,8 +44,9 @@ app.get('/', (req, res) => {
 })
 
 app.use("/user", user)
-
+app.use("/courseByUser", courseByUser)
 app.use("/classSchedule", classSchedule)
+app.use("/course", course)
 
 app.listen(port, () => {
   console.log(`server is listening on port ${port}`)
