@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
         res.send(success)
     }catch (e){
         console.log(e)
-        res.status(400).send(success);
+        res.send(success);
     }
 })
 router.delete("/", async (req, res) => {

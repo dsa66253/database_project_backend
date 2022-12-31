@@ -4,11 +4,11 @@ let router = express.Router()
 //todo location and course name are not shown
 // get course info mation by course id
 router.get("/", async (req, res) => {
-    console.log("req.query", req.query)
+    // console.log("req.query", req.query)
     // console.log("req.query", req.query)
     let courseId = req.query.CId
     let courseInfo = null
-    console.log("req.headers", req.headers)
+    // console.log("req.headers", req.headers)
     // let
     let Lang = req.headers.lang
     // courseId = "11173"
@@ -19,7 +19,6 @@ router.get("/", async (req, res) => {
     console.log(sql)
     try{
         courseInfo = await query(sql)
-        console.log(courseInfo)
         res.send(courseInfo)
     }catch (e){
         console.log(e)

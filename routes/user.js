@@ -21,6 +21,8 @@ let router = express.Router()
 router.post('/', async (req, res) => {
     // console.log(req)
     // console.log(req.query)
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.setHeader("Access-Control-Allow-Origin", "*")
     console.log("req.body.body", req.body.body)
     let userExist = false
     let SId = req.body.body.SId
@@ -29,6 +31,7 @@ router.post('/', async (req, res) => {
     WHERE S.SId=\"${SId}\"`
     let user = await query(sql)
     if (user.length===0){
+        // create new user
         res.send(userExist)
         sql = `INSERT INTO Student(SId, Password)
         VALUES(\"${SId}\", \"${SId}\");`
@@ -37,6 +40,18 @@ router.post('/', async (req, res) => {
         userExist = true
         res.send(userExist)
     }
+})
+router.get('/', async (req, res) => {
+    // console.log(req)
+    // console.log(req.query)
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.setHeader("Access-Control-Allow-Origin", "*")
+    // console.log("req.body.body", req.body.body)
+    // let userExist = false
+    // let SId = req.body.body.SId
+    console.log("getUser was called")
+    res.send(true)
+    
 })
 
 export default router
