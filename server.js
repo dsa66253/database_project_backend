@@ -8,13 +8,13 @@ import dotenv from "dotenv"
 import courseByUser from "./routes/courseByUser.js"
 import course from "./routes/course.js"
 import cors from "cors"
+let whiteList = ["http://140.112.26.145:3000", "http://localhost:3000"]
 const app = express()
-app.use(
-  cors({
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  })
-);
+app.use(cors({
+  origin: whiteList,
+  methods:["GET", "PUT", "DELETE", "POST"]
+}));
+
 const options = {
   swaggerDefinition: {
     // 這邊會是你的api文件網頁描述
@@ -40,6 +40,7 @@ const port = 4000
 
 app.use(express.json()) // for parse the requeset body
 app.get('/', (req, res) => {
+  
   res.send('Hello Good World!!')
 })
 

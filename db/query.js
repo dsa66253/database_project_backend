@@ -21,8 +21,10 @@ let query = (sql)=>{
             (error, results, fields)=> {
                 if (error) {
                     reject(error)
+                    connection.end()
                 }
                 resolve(results)
+                connection.end()
             }
         )
     })
