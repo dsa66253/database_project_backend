@@ -11,7 +11,7 @@ import cors from "cors"
 let whiteList = ["http://140.112.26.145:3000", "http://localhost:3000"]
 const app = express()
 app.use(cors({
-  origin: whiteList,
+  origin: "*",
   methods:["GET", "PUT", "DELETE", "POST"]
 }));
 
