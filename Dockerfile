@@ -9,7 +9,6 @@ COPY package*.json ./
 RUN npm install
 # If you are building your code for production
 # RUN npm ci
-Dockerfile
 # set ownership and permissions
 RUN chown -R node:node ./
 #switch to node user
