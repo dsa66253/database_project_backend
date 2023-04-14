@@ -1,5 +1,5 @@
 import express from "express"
-
+import { getTransactionConn, testConnection } from "./db/db.js"
 import classSchedule from "./routes/classSchedule.js"
 import user from "./routes/user.js"
 import swaggerJsdoc from "swagger-jsdoc"
@@ -50,5 +50,6 @@ app.use("/classSchedule", classSchedule)
 app.use("/course", course)
 
 app.listen(port, () => {
+  testConnection()
   console.log(`server is listening on port ${port}`)
 })
